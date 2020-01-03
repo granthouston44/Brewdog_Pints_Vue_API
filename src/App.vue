@@ -14,6 +14,7 @@
 import BeersList from './components/BeersList.vue'
 import BeersListAll from './components/BeersListAll.vue'
 import BeerDetail from './components/BeerDetail.vue'
+import FavList from './components/FavouriteBeersList.vue'
 
 import {eventBus} from './main.js'
 
@@ -24,13 +25,25 @@ export default {
     return {
       beers: [],
       isHidden: true,
-      selectedBeer: null
+      selectedBeer: null,
     }
   },
   components: {
     "beers-list": BeersList,
     "beers-list-all": BeersListAll,
-    "beer-detail": BeerDetail
+    "beer-detail": BeerDetail,
+    "fav-list": FavList
+  },
+  computed: {
+    favourites(){
+      return this.beers.filter(beer =>beer.isFavourite)
+    }
+  },
+  methods: {
+    favBeer: function(beer){
+      const index = this.beers.indexOf(beer)
+      this.beers[index].isFavourite = true
+    }
   },
 
 mounted(){
@@ -41,7 +54,11 @@ mounted(){
   eventBus.$on('selected-beer', (beer)=>{
     this.selectedBeer = beer
     this.isHidden = true
+})
+  eventBus.$on('favourite-checkbox', (beer)=>{
+    this.favBeer(beer);
   })
+
 }
 
 
