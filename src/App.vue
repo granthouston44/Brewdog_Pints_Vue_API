@@ -5,6 +5,7 @@
       <button v-on:click="isHidden = false" type="button" name="button">All</button>
       <beers-list-all v-if="!isHidden" :allBeersProp="beers"/>
       <beers-list :allBeersProp="beers"/>
+      <beer-detail :beerProp="selectedBeer"/>
     </div>
   </div>
 </template>
@@ -12,7 +13,10 @@
 <script>
 import BeersList from './components/BeersList.vue'
 import BeersListAll from './components/BeersListAll.vue'
+import BeerDetail from './components/BeerDetail.vue'
+
 import {eventBus} from './main.js'
+
 
 export default {
   name: 'app',
@@ -25,7 +29,8 @@ export default {
   },
   components: {
     "beers-list": BeersList,
-    "beers-list-all": BeersListAll
+    "beers-list-all": BeersListAll,
+    "beer-detail": BeerDetail
   },
   methods: {
     handleChange(event){
