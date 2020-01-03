@@ -32,11 +32,6 @@ export default {
     "beers-list-all": BeersListAll,
     "beer-detail": BeerDetail
   },
-  methods: {
-    handleChange(event){
-      console.log('hi from click');;
-    }
-  },
 
 mounted(){
   fetch("https://api.punkapi.com/v2/beers")
